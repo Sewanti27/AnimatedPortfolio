@@ -1,11 +1,11 @@
-import { withSentryConfig } from '@sentry/nextjs';
+const { withSentryConfig } = require('@sentry/nextjs');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
 };
 
-export default withSentryConfig(nextConfig, {
+const sentryWebpackPluginOptions = {
   org: "sewanti-lahiri",
   project: "javascript-nextjs",
   silent: !process.env.CI,
@@ -13,4 +13,6 @@ export default withSentryConfig(nextConfig, {
   hideSourceMaps: true,
   disableLogger: true,
   automaticVercelMonitors: true,
-});
+};
+
+module.exports = withSentryConfig(nextConfig, sentryWebpackPluginOptions);
